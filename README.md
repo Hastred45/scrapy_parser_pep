@@ -1,11 +1,9 @@
-# Описание
+[Python 3.9.6](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=ffffff&color=043A6B)](https://www.python.org/downloads/release/python-396/)
+[Scrapy 2.5.1](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=ffffff&color=043A6B)](https://scrapy.org/)
+
+# Асинхронный парсер PEP
 
 Парсер документов PEP на базе фреймворка Scrapy. Парсер создает два файла отчета: файл со списком PEP, включающим номер документа, название и статус, и файл суммарной статистики по количеству документов в разных статусах.
-
-## Стек технологий
-
-* Python 3.9
-* Scrapy
 
 ## Запуск парсера на macOS
 
