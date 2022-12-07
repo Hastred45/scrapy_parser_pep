@@ -1,4 +1,4 @@
-[Python 3.9.6](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=ffffff&color=043A6B)](https://www.python.org/downloads/release/python-396/)
+[![Python 3.9.6](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=ffffff&color=043A6B)](https://www.python.org/downloads/release/python-396/)
 [Scrapy 2.5.1](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=ffffff&color=043A6B)](https://scrapy.org/)
 
 # Асинхронный парсер PEP
