@@ -29,10 +29,10 @@ class PepParsePipeline():
     def close_spider(self, spider):
         now = dt.datetime.now()
         now_formatted = now.strftime(DATETIME_FORMAT)
-        file_name = f'{self.results_dir}/status_summary_{now_formatted}.csv'
+        # file_name = f'{self.results_dir}/status_summary_{now_formatted}.csv'
         total = 0
         with open(
-                file_name,
+                f'{self.results_dir}/status_summary_{now_formatted}.csv',
                 mode='w',
                 encoding='utf-8'
         ) as f:
