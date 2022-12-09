@@ -1,7 +1,7 @@
 import datetime as dt
 from pathlib import Path
 
-# from .exceptions import NoStatusException
+from .exceptions import NoStatusException
 
 BASE_DIR = Path(__file__).parents[1]
 DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
@@ -18,21 +18,21 @@ class PepParsePipeline():
         self.results_data = {}
 
     def process_item(self, item, spider):
-        # try:
-        status = item['status']
-        self.results_data[status] = self.results_data.get(status, 0) + 1
-        return item
-        # except NoStatusException:
-        #     number = item['number']
-        #     print(f'PEP {number} не имеет статуса!')
+        try:
+            status = item['status']
+            self.results_data[status] = self.results_data.get(status, 0) + 1
+            return item
+        except NoStatusException:
+            number = item['number']
+            print(f'PEP {number} не имеет статуса!')
 
     def close_spider(self, spider):
         now = dt.datetime.now()
         now_formatted = now.strftime(DATETIME_FORMAT)
-        # file_name = f'{self.results_dir}/status_summary_{now_formatted}.csv'
+        file_name = f'{self.results_dir}/status_summary_{now_formatted}.csv'
         total = 0
         with open(
-                f'{self.results_dir}/status_summary_{now_formatted}.csv',
+                file_name,
                 mode='w',
                 encoding='utf-8'
         ) as f:
