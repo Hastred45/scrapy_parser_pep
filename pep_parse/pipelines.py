@@ -12,7 +12,8 @@ class PepParsePipeline():
     '''Считает количество PEP по статусам и общее количество'''
 
     def __init__(self) -> None:
-        RESULTS_DIR.mkdir(exist_ok=True)
+        self.results_dir = BASE_DIR / 'results'
+        self.results_dir.mkdir(exist_ok=True)
 
     def open_spider(self, spider):
         self.results_data = {}
@@ -29,15 +30,16 @@ class PepParsePipeline():
     def close_spider(self, spider):
         now = dt.datetime.now()
         now_formatted = now.strftime(DATETIME_FORMAT)
-        filename = f'{RESULTS_DIR}/status_summary_{now_formatted}.csv'
+        sorted_data = dict(sorted(self.results_data.items()))
+        file_name = f'{self.results_dir}/status_summary_{now_formatted}.csv'
         total = 0
         with open(
-                filename,
+                file_name,
                 mode='w',
                 encoding='utf-8'
         ) as f:
             f.write('Статус, Количество\n')
-            for key, value in self.results_data.items():
+            for key, value in sorted_data.items():
                 total += int(value)
                 f.write(f'{key}, {value}\n')
             f.write(f'Total,{total}\n')
