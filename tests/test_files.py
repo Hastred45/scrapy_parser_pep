@@ -1,6 +1,6 @@
-from pathlib import Path
-
 import pytest
+
+from pathlib import Path
 
 BASE_DIR = Path(__name__).absolute().parent
 MAIN_DIR = BASE_DIR / 'pep_parse'

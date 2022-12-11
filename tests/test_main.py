@@ -1,11 +1,8 @@
-import os
 import re
-from pathlib import Path
 
 import pytest
-from scrapy.crawler import CrawlerProcess
-
 from pep_parse import pipelines
+from scrapy.crawler import CrawlerProcess
 
 try:
     from pep_parse.spiders.pep import PepSpider
@@ -15,8 +12,8 @@ except ModuleNotFoundError:
     )
 
 
-def test_run_scrapy(monkeypatch, tmp_path):
-    mock_base_dir = Path(os.path.relpath(tmp_path))
+def test_run_scrapy(monkeypatch, temp_dir):
+    mock_base_dir = temp_dir
     monkeypatch.setattr(pipelines, 'BASE_DIR', mock_base_dir)
 
     process = CrawlerProcess(settings={
@@ -45,7 +42,7 @@ def test_run_scrapy(monkeypatch, tmp_path):
         file for file in mock_base_dir.glob('**/*')
         if str(file).endswith('.csv')
     ]
-    assert dirs == ['results'], (
+    assert 'results' in dirs, (
         'Убедитесь что в директории проекта создается директория `results` для '
         'вывода в файл результатов.'
     )
@@ -65,7 +62,6 @@ def test_run_scrapy(monkeypatch, tmp_path):
 def test_check_correct_output_files():
     with open(
         [file for file in output_files if 'pep' in str(file)][0], 'r',
-        encoding='utf-8',
     ) as file:
         file_result = file.read()
         pep_pattern = re.compile(r'(\d)+\,PEP\s?(\d)+\s?(.)+')
@@ -78,7 +74,6 @@ def test_check_correct_output_files():
         [
             file for file in output_files if 'status_summary_' in str(file)
         ][0], 'r',
-        encoding='utf-8',
     ) as file:
         file_result = file.read()
         active_pattern = re.compile(r'Active,(\d)+')

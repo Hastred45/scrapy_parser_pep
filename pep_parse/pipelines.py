@@ -12,7 +12,7 @@ class PepParsePipeline():
 
     def __init__(self) -> None:
         self.results_dir = BASE_DIR / 'results'
-        self.results_dir.mkdir(exist_ok=True)
+        self.results_dir.mkdir(parents=True, exist_ok=True)
 
     def open_spider(self, spider):
         self.results_data = {}
